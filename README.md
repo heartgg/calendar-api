@@ -15,6 +15,8 @@ This API is hosted on Heroku:
 
 You can check the calendar [here](https://calendar.google.com/calendar/u/3?cid=NXR1cGFmazZlZzhybDFnOWd2cG11bzRjb2dAZ3JvdXAuY2FsZW5kYXIuZ29vZ2xlLmNvbQ).
 
+*Apps on Heroku tend to sleep after being idle for some time which means it may take a while to initially process an API request.*
+
 ## API Usage
 ```
 POST /create_event

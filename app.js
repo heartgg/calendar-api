@@ -95,7 +95,7 @@ async function createEvent (event_name, start_date, end_date) {
             }
         });
         const collection = await db.createCollection(res.data.id);
-        return `Event id ${collection.collectionName} created successfully!`;
+        return collection.collectionName;
     } catch (error) {
         console.error(error);
         return `ERROR: ${error}`;
@@ -112,7 +112,7 @@ async function rsvpEvent (event_id, attendee_name) {
         if (!exists) return `ERROR: Event id ${event_id} not found!`;
         const collection = db.collection(event_id);
         const document = await collection.insertOne({ 'attendee_name': attendee_name });
-        return `Added ${attendee_name} to event id ${event_id} RSVPs (dbID ${document.insertedId})`;
+        return document.insertedId;
     } catch (error) {
         console.error(error);
         return `ERROR: ${error}`;

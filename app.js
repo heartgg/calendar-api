@@ -3,7 +3,6 @@ const { MongoClient } = require('mongodb');
 const { google } = require('googleapis');
 const express = require('express');
 
-const CREDENTIALS = require('./auth/credentials.json');
 const TOKEN_PATH = 'auth/token.json';
 const SCOPES = ['https://www.googleapis.com/auth/calendar.events'];
 
@@ -43,8 +42,7 @@ app.get('/list_rsvp', async (req, res) => {
     res.send(status);
 });
 
-const { client_id, client_secret, redirect_uris } = CREDENTIALS.web;
-const oAuth2Client = new google.auth.OAuth2(client_id, client_secret, redirect_uris[0]);
+const oAuth2Client = new google.auth.OAuth2(process.env.CLIENT_ID, process.env.CLIENT_SECRET, process.env.REDIRECT_URI);
 const dbClient = new MongoClient(process.env.URI);
 var calendar;
 

@@ -8,26 +8,54 @@ Endpoints include `create_event`, `rsvp_event`, and `list_rsvp`.
 * MongoDB Atlas Account
 * Google Account
 
-## Database
+### Repository
+1. Download the repository
+2. Create a `.env` file in the repository with the following:
+```
+API_KEY=yourMadeUpKey
+CALENDAR_ID=
+URI=
+CLIENT_ID=
+CLIENT_SECRET=
+REDIRECT_URI=
+```
+
+### Database
 1. Log into your Atlas account
 2. Create a new cluster
     1. Choose allowed IPs
     2. Create a database account
     3. Choose `Connect your application`
-    4. Copy the provided `uri`
+    4. Copy the provided `uri` into the `.env` URI field
 
-## Google
+### Google API
 1. Log into your google account
 2. Go to the [Google Developer Console](https://console.cloud.google.com/)
 3. Create a new project
 4. Enable Google Calendar API through the [API library](https://console.cloud.google.com/apis/library)
-5. Navigate to credentials
+5. Navigate to `credentials`
     1. Click create credentials
     2. Click OAuth Client ID
     3. Select Web application
     4. Add a URI ending with `/oauth2callback` (eg. `http://localhost:3000/oauth2callback`)
-    5. Download the auth client
-6. Copy the approperiate fields from the auth file into your `.env` file
+    5. Download the auth client file
+6. Copy the approperiate fields from the auth file into the approperiate `.env` fields
+7. Navigate to `OAuth consent screen`
+    1. Add a test user
+    2. Write your google account email
+
+### Calendar
+1. Go to the [Google Calendar](https://calendar.google.com/calendar)
+2. (Optional) Create a new calendar
+3. Navigate to the calendar's settings
+4. Copy the Calendar ID into the `.env` CALENDAR_ID field
+
+### Initial Start
+1. Run the app with `npm start`
+2. Click the link generated in the console
+    1. Authorize the application
+
+*Subsequent `npm start` should now start the application without asking for authorization*
 
 ## Heroku
 This API is hosted on Heroku:

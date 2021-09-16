@@ -3,7 +3,7 @@ const { MongoClient } = require('mongodb');
 const { google } = require('googleapis');
 const express = require('express');
 
-const TOKEN_PATH = 'auth/token.json';
+const TOKEN_PATH = 'token.json';
 const SCOPES = ['https://www.googleapis.com/auth/calendar.events'];
 
 const app = express();
@@ -17,7 +17,7 @@ app.use(express.json());
 
 app.get('/oauth2callback', async (req, res) => {
     const status = await authenticate(req.query.code, oAuth2Client);
-    res.sendStatus(status);
+    res.send(status);
 });
 
 app.post('/create_event', async (req, res) => {
@@ -64,7 +64,7 @@ function getNewToken (authClient) {
     console.log(`Auth url: ${authUrl}`);
 }
 
-function authenticate (code, authClient) {
+async function authenticate (code, authClient) {
     if (!code) return console.log('Error: access denied');
     authClient.getToken(code, (err, token) => {
         if (err) return console.error('Error getting token with code: ', err);
@@ -74,7 +74,7 @@ function authenticate (code, authClient) {
             console.log('Token stored to ', TOKEN_PATH);
         });
         calendar = google.calendar({ version: 'v3', auth: authClient });
-        return 'Authenticated';
+        return 200;
     });
 }
 

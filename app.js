@@ -22,7 +22,7 @@ app.get('/oauth2callback', async (req, res) => {
 
 app.post('/create_event', async (req, res) => {
     if (req.body.api_key != process.env.API_KEY) return res.send('Access denied.');
-    if (/[^a-z0-9]/gi.test(req.body.event_name)) return res.send('Invalid event name.');
+    if (/^[\w\-\s]+$/.test(req.body.event_name)) return res.send('Invalid event name.');
     if (verifyDate(req.body.start_date)) return res.send('Invalid start date.');
     if (verifyDate(req.body.end_date)) return res.send('Invalid end date.');
 

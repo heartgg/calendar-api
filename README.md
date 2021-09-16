@@ -8,6 +8,27 @@ Endpoints include `create_event`, `rsvp_event`, and `list_rsvp`.
 * MongoDB Atlas Account
 * Google Account
 
+## Database
+1. Log into your Atlas account
+2. Create a new cluster
+    1. Choose allowed IPs
+    2. Create a database account
+    3. Choose `Connect your application`
+    4. Copy the provided `uri`
+
+## Google
+1. Log into your google account
+2. Go to the [Google Developer Console](https://console.cloud.google.com/)
+3. Create a new project
+4. Enable Google Calendar API through the [API library](https://console.cloud.google.com/apis/library)
+5. Navigate to credentials
+    1. Click create credentials
+    2. Click OAuth Client ID
+    3. Select Web application
+    4. Add a URI ending with `/oauth2callback` (eg. `http://localhost:3000/oauth2callback`)
+    5. Download the auth client
+6. Copy the approperiate fields from the auth file into your `.env` file
+
 ## Heroku
 This API is hosted on Heroku:
 * hostname: `rsvp-calendar-api.herokuapp.com`
